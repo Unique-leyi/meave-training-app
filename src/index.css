@@ -1,0 +1,80 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-inter: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Primary scale — base #2f436c */
+  --color-primary-50: #eef1f7;
+  --color-primary-100: #d5dce9;
+  --color-primary-200: #b4c0d6;
+  --color-primary-300: #8a9bbd;
+  --color-primary-400: #5f77a4;
+  --color-primary-500: #2f436c;
+  --color-primary-600: #26365a;
+  --color-primary-700: #1e2b48;
+  --color-primary-800: #162036;
+  --color-primary-900: #0f1624;
+  --color-primary-950: #0a0f1a;
+
+  /* Secondary scale — base #f27b21 */
+  --color-secondary-50: #fff7ed;
+  --color-secondary-100: #ffedd5;
+  --color-secondary-200: #fed7aa;
+  --color-secondary-300: #fdba74;
+  --color-secondary-400: #fb923c;
+  --color-secondary-500: #f27b21;
+  --color-secondary-600: #c4621a;
+  --color-secondary-700: #924913;
+  --color-secondary-800: #62310d;
+  --color-secondary-900: #321806;
+
+  /* Dashboard Action Colors */
+  --color-success: #22c55e;
+  --color-success-foreground: #ffffff;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-foreground: #ffffff;
+  --color-info: #0ea5e9;
+  --color-info-foreground: #ffffff;
+
+  /* Semantic aliases */
+  --color-background: #ffffff;
+  --color-foreground: var(--color-primary-900);
+  --color-muted: #5c6578;
+  --color-border: var(--color-primary-100);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer components {
+  .meave-label {
+    @apply text-xs font-medium text-slate-400 uppercase tracking-widest mb-2 block pl-1;
+  }
+  .meave-input {
+    @apply w-full h-14 px-5 bg-white border-2 border-slate-400 rounded-2xl font-bold text-slate-900 outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-500/5 transition-all placeholder:text-slate-300 placeholder:font-medium disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .meave-textarea {
+    @apply w-full h-32 p-5 bg-white border-2 border-slate-400 rounded-2xl font-bold text-slate-900 outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-500/5 transition-all placeholder:text-slate-300 placeholder:font-medium resize-none;
+  }
+}
+
+/* Utilities */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
