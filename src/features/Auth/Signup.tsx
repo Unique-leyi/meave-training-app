@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { Check } from 'lucide-react'
 import AuthInput from '../../ui/components/AuthInput'
 import Button from '../../ui/components/Button'
+import Checkbox from '../../ui/components/Checkbox'
 import SocialButton from '../../ui/components/SocialButton'
 
 const Signup = () => {
@@ -15,11 +16,13 @@ const Signup = () => {
   } = useForm({
     defaultValues: {
       email: '',
-      password: ''
+      password: '',
+      agreeToTerms: false
     }
   })
 
   const password = watch('password', '')
+  const agreeToTerms = watch('agreeToTerms', false)
 
   const requirements = [
     { label: 'At least 8 characters', test: (p: string) => p.length >= 8 },
@@ -38,6 +41,8 @@ const Signup = () => {
     await new Promise(resolve => setTimeout(resolve, 2000))
     navigate('/verify-email')
   }
+
+  const isFormValid = requirements.every(req => req.test(password)) && agreeToTerms
 
   return (
     <div className="w-full">
@@ -92,11 +97,30 @@ const Signup = () => {
           </div>
         </div>
 
+        <Checkbox
+          label={
+            <span>
+              I agree to the{' '}
+              <Link to="/terms" className="text-primary-500 font-bold hover:underline">
+                Terms and Conditions
+              </Link>
+              {' '}and{' '}
+              <Link to="/privacy" className="text-primary-500 font-bold hover:underline">
+                Privacy Policy
+              </Link>
+            </span>
+          }
+          error={errors.agreeToTerms?.message}
+          {...register('agreeToTerms', { 
+            required: 'You must agree to the terms and conditions' 
+          })}
+        />
+
         <Button 
           type="submit" 
           isLoading={isSubmitting}
           loadingText="Creating Account..."
-          disabled={!requirements.every(req => req.test(password))}
+          disabled={!isFormValid}
         >
           Create Account
         </Button>
@@ -123,6 +147,7 @@ const Signup = () => {
             </Link>
           </p>
         </div>
+
       </form>
     </div>
   )
